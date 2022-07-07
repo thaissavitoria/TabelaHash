@@ -58,13 +58,14 @@ Observe através do exemplo que se a função utilizada for adequada e houver es
 ---
 
 ### Tabela Hash de Endereçamento Exterior
+
 Utiliza uma lista encadeada para cada endereço da tabela, como na figura abaixo.
-<img src="images/ext.png alt=endereçamentoexterior>
+<img src="images/ext.png" alt=endereçamentoexterior>
 ---
 
 ### Tabela Hash Dupla
 Também chamada de re-hash, calcula o valor da Função Hash principal e caso o enderço estiver ocupado, aplica uma segunda função hash e tenta inserir novamente.
-<img src="images/dup.png alt=dupla>
+<img src="images/dup.png" alt=dupla>
 ---
 
 ## Lógica
