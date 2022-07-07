@@ -79,6 +79,54 @@ Também chamada de re-hash, calcula o valor da Função Hash principal e caso o 
 
 ## Lógica
 
+É criado um vetor de inteiros e ele é inicializado da seguinte maneira:
+
+```c
+srand(time(NULL));
+     
+	for(int i=0;i<tamvetor;i++)
+    {
+        vet[i]=rand()%99;
+    }
+```
+A função ```rand()%99``` , da biblioteca time.h, preenche randomicamente o vetor, por meio do for, com números de 0 a 99.
+
+Depois disso, as Hashs, de Endereçamento Externo e a Dupla, são criadas, iniciadas, e recebem os valores presentes no vetor.
+
+  <ul>
+  <li>Hash Fechada
+
+```   HashC hc;
+
+    InitializeC(&hc,tamvetor);
+
+    for(int i=0;i<tamvetor;i++)
+    {
+        InsertC(&hc, vet[i]);
+    }
+
+    ImprimeC(&hc);
+ ```
+ 
+A Hash fechada é criada a partir de duas structs:
+
+ ```
+struct DataTableC{
+	int key;
+	int valores[20];
+};
+
+struct HashC{
+	int M; 
+	DataTableC *tableC; 
+	int colisoesC; 
+};
+  ```
+  Onde M é o tamanho da Hash, que no caso do endereçamento externo é do mesmo tamanho do vetor; a variável colisões, que é iniciada como 0 e incrementada cada vez que o algoritmo precisa inserir um valor em um vetor que não está vazio;  e um ponteiro do tipo da variável  ```DataTableC ```, que tem dentro dela, a chave(que é iniciada com -1) e um vetor de valores (com tamanho 20 para atender a possibilidade de haver um pior caso).
+  
+  
+ </li>
+
 
 ---
 
