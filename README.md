@@ -58,14 +58,23 @@ Observe através do exemplo que se a função utilizada for adequada e houver es
 ---
 
 ### Tabela Hash de Endereçamento Exterior
-
+<div align="justify">
 Utiliza uma lista encadeada para cada endereço da tabela, como na figura abaixo.
+</div>
+<div align="center">
 <img src="images/ext.png" alt=endereçamentoexterior>
+</div>
+
 ---
 
 ### Tabela Hash Dupla
+<div align="justify">
 Também chamada de re-hash, calcula o valor da Função Hash principal e caso o enderço estiver ocupado, aplica uma segunda função hash e tenta inserir novamente.
+</div>
+<div align="center">
 <img src="images/dup.png" alt=dupla>
+ </div>
+ 
 ---
 
 ## Lógica
