@@ -178,19 +178,19 @@ struct HashTable{
 Dado um vetor com valores randômicos representados abaixo:
 
 <div align="center">
-<img src="vetor.png" alt=vetor>
+<img src="images/vetor.png" alt=vetor>
 </div>
 
 A tabela Hash Fechada foi imprimida da seguinte maneira:
 
 <div align="center">
-<img src="printfechada.png" alt=printfechada>
+<img src="images/printfechada.png" alt=printfechada>
 </div>
 
 Já tabela Hash Dupla foi imprimida da seguinte maneira:
 
 <div align="center">
-<img src="printdupla.png" alt=printdupla>
+<img src="images/printdupla.png" alt=printdupla>
 </div>
 
 OBS: Ambos prints mostram apenas uma parte da impressão.
@@ -198,11 +198,12 @@ OBS: Ambos prints mostram apenas uma parte da impressão.
 Por fim, temos a impressão dos números de colisões:
 
 <div align="center">
-<img src="colisoes.png" alt=colisoes>
+<img src="images/colisoes.png" alt=colisoes>
 </div>
 
 ### Sobre o número de colisões
- Após diversas repetições na execução do código, nota-se que a hash fechada tende a ter menos colisões do que a dupla. Isso acontece porqu
+ Após diversas repetições na execução do código, nota-se que a hash fechada tende a ter menos colisões do que a dupla. Isso acontece porquê, ao aplicarmos uma segunda função Hash, podemos ter outra colisão.
+ Mas o valor dessas colisões depende também dos números do vetor, do tamanho dele e de outros aspectos além da organzação das Hashs.
 ---
 
 ## Bibliotecas
