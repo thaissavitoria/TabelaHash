@@ -59,8 +59,9 @@ Observe através do exemplo que se a função utilizada for adequada e houver es
 
 ### Tabela Hash de Endereçamento Exterior
 <div align="justify">
-Utiliza uma lista encadeada para cada endereço da tabela, como na figura abaixo.
+Utiliza uma lista encadeada para cada endereço da tabela, como na figura abaixo. No nosso caso, utilizamos um vetor para guardar os elementos da Hash.
 </div>
+<p></p>
 <div align="center">
 <img src="images/ext.png" alt=endereçamentoexterior>
 </div>
@@ -71,6 +72,7 @@ Utiliza uma lista encadeada para cada endereço da tabela, como na figura abaixo
 <div align="justify">
 Também chamada de re-hash, calcula o valor da Função Hash principal e caso o enderço estiver ocupado, aplica uma segunda função hash e tenta inserir novamente.
 </div>
+<p></p>
 <div align="center">
 <img src="images/dup.png" alt=dupla>
  </div>
@@ -84,7 +86,7 @@ Também chamada de re-hash, calcula o valor da Função Hash principal e caso o 
 ```c
 srand(time(NULL));
      
-	for(int i=0;i<tamvetor;i++)
+    for(int i=0;i<tamvetor;i++)
     {
         vet[i]=rand()%99;
     }
@@ -94,9 +96,11 @@ A função ```rand()%99``` , da biblioteca time.h, preenche randomicamente o vet
 Depois disso, as Hashs, de Endereçamento Externo e a Dupla, são criadas, iniciadas, e recebem os valores presentes no vetor.
 
   <ul>
-  <li>Hash Fechada
+  <li> <i>Hash Fechada</i>
+  
+```c
 
-```   HashC hc;
+HashC hc;
 
     InitializeC(&hc,tamvetor);
 
@@ -105,12 +109,11 @@ Depois disso, as Hashs, de Endereçamento Externo e a Dupla, são criadas, inici
         InsertC(&hc, vet[i]);
     }
 
-    ImprimeC(&hc);
  ```
  
 A Hash fechada é criada a partir de duas structs:
 
- ```
+ ```c
 struct DataTableC{
 	int key;
 	int valores[20];
@@ -122,17 +125,84 @@ struct HashC{
 	int colisoesC; 
 };
   ```
-  Onde M é o tamanho da Hash, que no caso do endereçamento externo é do mesmo tamanho do vetor; a variável colisões, que é iniciada como 0 e incrementada cada vez que o algoritmo precisa inserir um valor em um vetor que não está vazio;  e um ponteiro do tipo da variável  ```DataTableC ```, que tem dentro dela, a chave(que é iniciada com -1) e um vetor de valores (com tamanho 20 para atender a possibilidade de haver um pior caso).
-  
+  Onde M é o tamanho da Hash, que no caso do endereçamento externo é do mesmo tamanho do vetor; a variável colisões, que é iniciada como 0 e incrementada cada vez que o algoritmo precisa inserir um valor em um vetor que não está vazio;  e um ponteiro do tipo da variável  ```DataTableC```  que tem dentro dela, as chaves e um vetor de valores. Tanto o vetor de valores como as chaves são inicializados com o valor -1 para o controle de inserções.
+  A função ```InsertC(&hc, vet[i])``` recebe a hash e o valor que desejamos adicionar nela. Por meio desse valor, utilizando a Função Hash 1, que é dada pelo resto da divisão do valor pelo tamanho total da hash, a função calcula a chave e procura para ver se ela já está presente na hash. Se sim, ela insere o valor em uma posição vazia do vetor daquela chave e se não, ela insere a chave e o valor como a posição 0 do vetor de valores dessa chave.
   
  </li>
+ 
+   <li><i>Hash Dupla</i>
+   
+```c
+ M=calculaTamanhoHashDupla(tamvetor);
+
+    HashTable h;
+    Initialize(&h, M);
+
+    for(int i=0;i<tamvetor;i++)
+    {
+        Insert(&h, vet[i]);
+    }
+
+ ```
+ 
+A Hash dupla é criada a partir de duas structs:
+
+ ```c
+struct DataTable{
+	int key;
+	int value;
+};
+
+
+struct HashTable{
+	DataTable *table;
+	int M;
+	int colisoesD;
+};
+  ```
+  Onde M é o tamanho da Hash, que no caso da Hash Dupla, é o número primo que seja mais próximo e maior do que o tamanho do vetor; a variável colisões, que é iniciada como 0 e incrementada cada vez que o algoritmo precisa calcular a segunda função hash;  e um ponteiro do tipo da variável  ```DataTable```  que tem dentro dela, a chave e um valor. A chave é inicializada com -1 e o valor com 0 para cada posição menor que o tamanho M da Hash.
+  A função ```Insert(&h, vet[i])``` recebe a hash e o valor que desejamos adicionar nela. Por meio desse valor, utilizando a Função Hash 1, que é dada pelo resto da divisão do valor pelo tamanho total da hash, a função calcula a chave e procura para ver se ela já está presente na hash. Se sim, ela calcula novamente a chave por meio do resto da divisão do incremento do valor de conflito pelo tamanho da hash. Se ela retorna para o valor inicial sem conseguir realizar a inserção, é retornada uma mensagem informando que a Hash está cheia.
+  
+ </li>
+ </ul>
+ 
+ As hashs são imprimidas quando o processo de cada uma acaba e no final aparecem as colisões que cada uma obteve.
 
 
 ---
 
 ## Resultados e Análises 
 
+### Exemplo de execução:
 
+Dado um vetor com valores randômicos representados abaixo:
+
+<div align="center">
+<img src="vetor.png" alt=vetor>
+</div>
+
+A tabela Hash Fechada foi imprimida da seguinte maneira:
+
+<div align="center">
+<img src="printfechada.png" alt=printfechada>
+</div>
+
+Já tabela Hash Dupla foi imprimida da seguinte maneira:
+
+<div align="center">
+<img src="printdupla.png" alt=printdupla>
+</div>
+
+OBS: Ambos prints mostram apenas uma parte da impressão.
+
+Por fim, temos a impressão dos números de colisões:
+
+<div align="center">
+<img src="colisoes.png" alt=colisoes>
+</div>
+
+### Sobre o número de colisões
+ Após diversas repetições na execução do código, nota-se que a hash fechada tende a ter menos colisões do que a dupla. Isso acontece porqu
 ---
 
 ## Bibliotecas
@@ -142,6 +212,7 @@ struct HashC{
     <li><code>#include 'stdlib.h'</code></li>
     <li><code>#include 'stdio.h'</code></li>
     <li><code>#include 'stdbool.h'</code></li>
+    <li><code>#include 'time.h'</code></li>
 </ul>
 
 ---
