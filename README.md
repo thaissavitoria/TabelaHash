@@ -204,6 +204,7 @@ Por fim, temos a impressão dos números de colisões:
 ### Sobre o número de colisões
  Após diversas repetições na execução do código, nota-se que a hash fechada tende a ter menos colisões do que a dupla. Isso acontece porquê, ao aplicarmos uma segunda função Hash, podemos ter outra colisão.
  Mas o valor dessas colisões depende também dos números do vetor, do tamanho dele e de outros aspectos além da organzação das Hashs.
+ 
 ---
 
 ## Bibliotecas
